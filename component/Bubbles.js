@@ -140,17 +140,17 @@ function Bubbles(container, self, options) {
       turn.reply.reverse()
       for (var i = 0; i < turn.reply.length; i++) {
         ;(function(el, count) {
-          var dataAttribute = "";
+          var attributes = "";
 
-          if (typeof el.data != 'undefined') {
+          if (typeof el.attributes != 'undefined') {
             Object.keys(el.data).forEach(function(key, index) {
-              dataAttribute += "data-" + key "='" + el.data[key] + "' ";
+              attributes += key + "='" + el.attributes[key] + "' ";
             });
           }
 
           questionsHTML +=
             '<span class="bubble-button" ' +
-            dataAttribute +
+            attributes +
             'style="animation-delay: ' +
             animationTime / 2 * count +
             'ms" onClick="' +
