@@ -140,8 +140,18 @@ function Bubbles(container, self, options) {
       turn.reply.reverse()
       for (var i = 0; i < turn.reply.length; i++) {
         ;(function(el, count) {
+          var dataAttribute = "";
+
+          if (typeof el.data != 'undefined') {
+            Object.keys(el.data).forEach(function(key, index) {
+              dataAttribute += "data-" + key "='" + el.data[key] + "' ";
+            });
+          }
+
           questionsHTML +=
-            '<span class="bubble-button" style="animation-delay: ' +
+            '<span class="bubble-button" ' +
+            dataAttribute +
+            'style="animation-delay: ' +
             animationTime / 2 * count +
             'ms" onClick="' +
             self +
