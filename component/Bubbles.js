@@ -143,7 +143,7 @@ function Bubbles(container, self, options) {
           var attributes = "";
 
           if (typeof el.attributes != 'undefined') {
-            Object.keys(el.data).forEach(function(key, index) {
+            Object.keys(el.attributes).forEach(function(key, index) {
               attributes += key + "='" + el.attributes[key] + "' ";
             });
           }
