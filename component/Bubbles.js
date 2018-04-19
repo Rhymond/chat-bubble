@@ -153,6 +153,10 @@ function Bubbles(container, self, options) {
             attributes +
             'style="animation-delay: ' +
             animationTime / 2 * count +
+            'ms; -ms-animation-delay: ' +
+            animationTime / 2 * count +
+            'ms; -webkit-animation-delay: ' +
+            animationTime / 2 * count +
             'ms" onClick="' +
             self +
             ".answer('" +
