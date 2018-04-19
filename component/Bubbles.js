@@ -151,13 +151,7 @@ function Bubbles(container, self, options) {
           questionsHTML +=
             '<span class="bubble-button" ' +
             attributes +
-            'style="animation-delay: ' +
-            animationTime / 2 * count +
-            'ms; -ms-animation-delay: ' +
-            animationTime / 2 * count +
-            'ms; -webkit-animation-delay: ' +
-            animationTime / 2 * count +
-            'ms" onClick="' +
+            ' onClick="' +
             self +
             ".answer('" +
             el.answer +
