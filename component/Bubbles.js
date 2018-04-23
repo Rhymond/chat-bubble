@@ -13,7 +13,7 @@ function Bubbles(container, self, options) {
 
   var _convo = {} // local memory for conversation JSON object
   //--> NOTE that this object is only assigned once, per session and does not change for this
-  // 		constructor name during open session.
+  //    constructor name during open session.
 
   // local storage for recalling conversations upon restart
   var localStorageCheck = function() {
@@ -153,11 +153,11 @@ function Bubbles(container, self, options) {
             attributes +
             ' onClick="' +
             self +
-            ".answer('" +
+            ".answer(this, '" +
             el.answer +
             "', '" +
             el.question +
-            "');this.classList.add('bubble-pick')\">" +
+            "')\">" +
             el.question +
             "</span>"
         })(turn.reply[i], i)
@@ -171,10 +171,25 @@ function Bubbles(container, self, options) {
     })
   }
   // navigate "answers"
-  this.answer = function(key, content) {
+  this.answer = function(el, key, content) {
     var func = function(key) {
       typeof window[key] === "function" ? window[key]() : false
     }
+    
+    el.classList.add('bubble-pick')
+    var bubbleContent = el.parentNode;
+    var bubbleButtons = bubbleContent.querySelectorAll(".bubble-button")
+
+    for (var i = 0; i < bubbleButtons.length; i++) {
+      ;(function(el) {
+        el.style.width = 0 + "px"
+        el.classList.contains("bubble-pick") ? (el.style.width = "") : false
+        el.removeAttribute("onclick")
+      })(bubbleButtons[i])
+    }
+
+    bubbleContent.parentNode.classList.add('bubble-picked')
+
     _convo[key] !== undefined
       ? (this.reply(_convo[key]), (standingAnswer = key))
       : func(key)
@@ -242,16 +257,6 @@ function Bubbles(container, self, options) {
             el.style.width = el.offsetWidth - sidePadding * 2 + widerBy + "px"
         })(bubbleButtons[z])
       }
-      bubble.addEventListener("click", function() {
-        for (var i = 0; i < bubbleButtons.length; i++) {
-          ;(function(el) {
-            el.style.width = 0 + "px"
-            el.classList.contains("bubble-pick") ? (el.style.width = "") : false
-            el.removeAttribute("onclick")
-          })(bubbleButtons[i])
-        }
-        this.classList.add("bubble-picked")
-      })
     }
     // time, size & animate
     wait = live ? animationTime * 2 : 0
